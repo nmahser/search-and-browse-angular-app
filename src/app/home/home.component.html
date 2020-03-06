@@ -1,1 +1,18 @@
-<p>home works!</p>
+<div class="container-home">
+  <ul class="cards">
+    <li *ngFor="let video of videos" class="cards_item">
+      <div class="card">
+        <div class="card_image">
+          <img [src]="video.snippet.thumbnails.high.url" alt="thumbnail" />
+        </div>
+        <div class="card_content">
+          <h2 class="card_title">{{ video.snippet.title }}</h2>
+          <p class="card_text">
+            {{ video.snippet.description }}
+          </p>
+          <button class="btn card_btn">Read More</button>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
