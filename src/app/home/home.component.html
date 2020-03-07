@@ -1,5 +1,5 @@
 <div class="container-home">
-  <ul class="cards">
+  <ul *ngIf="videos" class="cards">
     <li *ngFor="let video of videos" class="cards_item">
       <div class="card">
         <div class="card_image">
