@@ -10,7 +10,14 @@
           <p class="card_text">
             {{ video.snippet.description }}
           </p>
-          <button class="btn card_btn">Read More</button>
+          <button
+            type="submit"
+            class="btn card_btn"
+            (click)="displayVideo($event)"
+            [value]="video.id.videoId"
+          >
+            Watch Video
+          </button>
         </div>
       </div>
     </li>

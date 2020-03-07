@@ -7,7 +7,10 @@ import { HttpService } from "../http.service";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
+  /* Create Interface for the properties */
   videos;
+  videoId;
+
   constructor(private http: HttpService) {}
 
   ngOnInit(): void {
@@ -15,5 +18,9 @@ export class HomeComponent implements OnInit {
       console.log(data);
       this.videos = data["items"];
     });
+  }
+
+  displayVideo(event: any) {
+    this.videoId = event.target.value;
   }
 }
