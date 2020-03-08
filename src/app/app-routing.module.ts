@@ -5,7 +5,7 @@ import { VideoComponent } from "./video/video.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent },
-  { path: "Video", component: VideoComponent }
+  { path: "video", component: VideoComponent }
 ];
 
 @NgModule({
