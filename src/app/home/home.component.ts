@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
 
   // redirects to video component
   redirectToVideo() {
-    this.router.navigate(["/video"]);
+    console.log(this.videoId);
+    this.router.navigate(["/video", this.videoId]);
   }
 }
