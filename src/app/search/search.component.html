@@ -1,0 +1,12 @@
+<section class="filter-wrapper">
+  <div class="keyword-wrapper">
+    <input
+      (keydown.enter)="searchThis($event)"
+      [formControl]="queryField"
+      type="text"
+      id="keyword"
+      placeholder="search for videos..."
+      autofocus
+    />
+  </div>
+</section>
