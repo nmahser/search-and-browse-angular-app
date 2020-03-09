@@ -37,4 +37,21 @@
       </li>
     </ul>
   </form>
+  <!-- infinite scroll div -->
+  <div
+    class="search-results"
+    infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollThrottle]="1000"
+    (scrolled)="onScroll()"
+  ></div>
+
+  <!-- Alert no more post -->
+  <div *ngIf="!notMoreVideos" class="row pb-5">
+    <div class="col-md-12 d-flex justify-content-center">
+      <div class="text-muted h6 alert alert-secondary p-2">
+        No more items to show
+      </div>
+    </div>
+  </div>
 </div>

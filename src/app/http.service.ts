@@ -10,15 +10,22 @@ import { throwError } from "rxjs";
 export class HttpService {
   // set API_KEY
   API_KEY: string = environment.API_KEY;
-
   constructor(private http: HttpClient) {}
 
+  // get videos - home page
   public getVideos() {
     return this.http
       .get(
         `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&q=dog`
       )
       .pipe(retry(2), catchError(this.handleError)); // makes the second call if first one fails
+  }
+
+  // infinite scroll
+  public infiteScroll(PageToken) {
+    let nextPageToken = PageToken;
+    const url = `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDk46QndNK82oKYNDnSPiu_4bo4Kh5K7Lc&part=snippet&type=video&q=dog&maxResults=10&pageToken=${nextPageToken}`;
+    return this.http.get(url).pipe(retry(2), catchError(this.handleError));
   }
 
   // error handler
