@@ -13,6 +13,8 @@ export class HttpService {
 
   constructor(private http: HttpClient) {}
 
+  // get dog related videos - used in home comp
+
   public getVideos() {
     return this.http
       .get(
@@ -20,6 +22,10 @@ export class HttpService {
       )
       .pipe(retry(2), catchError(this.handleError)); // makes the second call if first one fails
   }
+
+  // display a selected video - used in video comp
+
+  public displayVideo() {}
 
   // error handler
   handleError(error) {

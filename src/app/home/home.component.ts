@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { HttpService } from "../http.service";
 import { Router } from "@angular/router";
-import { NgForm } from "@angular/forms";
+import { NgForm, FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: "app-home",
@@ -12,13 +12,34 @@ export class HomeComponent implements OnInit {
   /* Create Interface for the properties */
   videos;
   description;
-  channelTitle;
+  angForm: FormGroup;
   videoId;
+  channelTitle;
+  title;
+  video;
 
   // get the reference to the #videoInfo form in home html
   @ViewChild("videoInfo") videoInfo: NgForm;
 
-  constructor(private http: HttpService, private router: Router) {}
+  constructor(
+    private http: HttpService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.createForm();
+  }
+  /* For Reactive Form */
+  createForm() {
+    this.angForm = this.fb.group({
+      videoId: this.videoId,
+      channelTitle: this.channelTitle,
+      title: this.title
+    });
+  }
+  onSubmit() {
+    console.log(this.angForm);
+  }
+  /*     */
 
   // on loading
   ngOnInit(): void {
@@ -32,7 +53,8 @@ export class HomeComponent implements OnInit {
     this.description = this.videoInfo.value.description;
     this.channelTitle = this.videoInfo.value.channelTitle;
     this.videoId = this.videoInfo.value.videoId;
+    this.title = this.videoInfo.value.title;
+
     this.router.navigate(["/video", this.videoId]);
-    this.videoInfo.resetForm();
   }
 }

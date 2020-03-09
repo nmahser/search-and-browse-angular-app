@@ -1,5 +1,44 @@
+<!--<div class="container-home">
+  <form [formGroup]="angForm" (ngSubmit)="onSubmit()">
+    <ul *ngIf="videos" class="cards">
+      <li *ngFor="let video of videos" class="cards_item">
+        <div class="card">
+          <div class="card_image">
+            <img [src]="video.snippet.thumbnails.high.url" alt="thumbnail" />
+          </div>
+          <div class="card_content">
+            <h2 class="card_title">{{ video.snippet.title }}</h2>
+            <input
+              name="title"
+              [value]="video.snippet.title"
+              formControlName="title"
+              style="display: none;"
+            />
+            <input
+              type="hidden"
+              name="channelTitle"
+              [value]="video.snippet.channelTitle"
+              formControlName="channelTitle"
+            />
+            <p class="card_text">
+              {{ video.snippet.description }}
+            </p>
+            <input
+              type="hidden"
+              name="videoId"
+              [value]="video.id.videoId"
+              formControlName="videoId"
+            />
+            <input class="btn card_btn" type="submit" value="Watch Video" />
+          </div>
+        </div>
+      </li>
+    </ul>
+  </form>
+</div>-->
+
 <div class="container-home">
-  <form #videoInfo="ngForm" (ngSubmit)="onClickWatch()">
+  <form #videoInfo="ngForm">
     <ul *ngIf="videos" class="cards">
       <li *ngFor="let video of videos" class="cards_item">
         <div class="card">
@@ -14,23 +53,24 @@
               [(ngModel)]="video.snippet.title"
             />
             <input
-              type="hidden"
               name="channelTitle"
               [(ngModel)]="video.snippet.channelTitle"
+              style="display: none;"
             />
             <p class="card_text">
               {{ video.snippet.description }}
-              <input
-                type="hidden"
-                name="description"
-                [(ngModel)]="video.snippet.description"
-              />
             </p>
-            <input class="btn card_btn" type="submit" value="Watch Video" />
             <input
-              type="hidden"
-              name="videoId"
+              [value]="video.id.videoId"
               [(ngModel)]="video.id.videoId"
+              name="videoId"
+              style="display: none;"
+            />
+            <input
+              class="btn card_btn"
+              type="submit"
+              (click)="onClickWatch()"
+              value="Watch Video"
             />
           </div>
         </div>
