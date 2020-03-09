@@ -20,9 +20,6 @@ export class HomeComponent implements OnInit {
   notscrolly = true;
   nextPageToken;
 
-  // get the reference to the #videoInfo form in home html
-  @ViewChild("videoInfo") videoInfo: NgForm;
-
   constructor(private http: HttpService, private router: Router) {}
 
   // on loading
@@ -35,11 +32,11 @@ export class HomeComponent implements OnInit {
   }
 
   // on form submission
-  onClickWatch() {
-    this.description = this.videoInfo.value.description;
-    this.channelTitle = this.videoInfo.value.channelTitle;
-    this.videoId = this.videoInfo.value.videoId;
-    this.title = this.videoInfo.value.title;
+  onClickWatch(video: any) {
+    this.description = video.snippet.title;
+    this.channelTitle = video.snippet.channelTitle;
+    this.videoId = video.id.videoId;
+    this.title = video.snippet.title;
     // routes to video component
     this.router.navigate(["/video", this.videoId]);
   }

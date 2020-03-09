@@ -1,42 +1,23 @@
 <div class="container-home">
-  <form #videoInfo="ngForm" (ngSubmit)="onClickWatch()">
-    <ul *ngIf="videos" class="cards">
-      <li *ngFor="let video of videos" class="cards_item">
-        <div class="card">
-          <div class="card_image">
-            <img [src]="video.snippet.thumbnails.high.url" alt="thumbnail" />
-          </div>
-          <div class="card_content">
-            <h2 class="card_title">{{ video.snippet.title }}</h2>
-            <input
-              type="hidden"
-              name="title"
-              [(ngModel)]="video.snippet.title"
-            />
-            <input
-              type="hidden"
-              name="channelTitle"
-              [(ngModel)]="video.snippet.channelTitle"
-            />
-            <p class="card_text">
-              {{ video.snippet.description }}
-              <input
-                type="hidden"
-                name="description"
-                [(ngModel)]="video.snippet.description"
-              />
-            </p>
-            <input class="btn card_btn" type="submit" value="Watch Video" />
-            <input
-              type="hidden"
-              name="videoId"
-              [(ngModel)]="video.id.videoId"
-            />
-          </div>
+  <ul *ngIf="videos" class="cards">
+    <li *ngFor="let video of videos" class="cards_item">
+      <div class="card">
+        <div class="card_image">
+          <img [src]="video.snippet.thumbnails.high.url" alt="thumbnail" />
         </div>
-      </li>
-    </ul>
-  </form>
+        <div class="card_content">
+          <h2 class="card_title">{{ video.snippet.title }}</h2>
+
+          <p class="card_text">
+            {{ video.snippet.description }}
+          </p>
+          <button class="btn card_btn" (click)="onClickWatch(video)">
+            Watch Video
+          </button>
+        </div>
+      </div>
+    </li>
+  </ul>
   <!-- infinite scroll div -->
   <div
     class="search-results"
