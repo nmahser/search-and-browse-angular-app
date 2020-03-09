@@ -24,7 +24,7 @@ export class HttpService {
   // infinite scroll
   public infiteScroll(PageToken) {
     let nextPageToken = PageToken;
-    const url = `https://www.googleapis.com/youtube/v3/search?key=AIzaSyDk46QndNK82oKYNDnSPiu_4bo4Kh5K7Lc&part=snippet&type=video&q=dog&maxResults=10&pageToken=${nextPageToken}`;
+    const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&q=dog&maxResults=10&pageToken=${nextPageToken}`;
     return this.http.get(url).pipe(retry(2), catchError(this.handleError));
   }
 
