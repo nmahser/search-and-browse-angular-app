@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { VideoService } from "../video.service";
 import { DomSanitizer } from "@angular/platform-browser";
+import { SearchService } from "../search.service";
 
 @Component({
   selector: "app-video",
@@ -14,9 +15,13 @@ export class VideoComponent implements OnInit {
   videoId: string;
   youtubeVideoLink: string = "https://www.youtube.com/embed/";
 
+  // variables for data sharing among components
+  searchInput: string;
+
   constructor(
     private videoService: VideoService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -30,6 +35,11 @@ export class VideoComponent implements OnInit {
     this.videoId = this.videoObject["id"].videoId;
     // paste videoId into youtube embed link
     this.youtubeVideoLink = this.youtubeVideoLink.concat(this.videoId);
+
+    // subscribe to search input
+    this.searchService.currentSearchinput.subscribe(
+      searchInput => (this.searchInput = searchInput)
+    );
   }
 
   // bypass the sanitizer security check
