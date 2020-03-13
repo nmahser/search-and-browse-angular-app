@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { HttpService } from "../http.service";
 import { Router } from "@angular/router";
-import { NgForm } from "@angular/forms";
+import { VideoService } from "../video.service";
+import { SearchService } from "../search.service";
 
 @Component({
   selector: "app-home",
@@ -10,17 +11,27 @@ import { NgForm } from "@angular/forms";
 })
 export class HomeComponent implements OnInit {
   /* Create Interface for the properties */
+  description: string;
+  channelTitle: string;
+  videoId: string;
+  title: string;
   videos;
-  description;
-  channelTitle;
-  videoId;
-  title;
-  // Properties for infinite scroll
+
+  // variables for infinite scroll
   notMoreVideos = true;
   notscrolly = true;
-  nextPageToken;
+  nextPageToken: string;
 
-  constructor(private http: HttpService, private router: Router) {}
+  // variables for data sharing among components
+  videoObject: object;
+  searchInput: string;
+
+  constructor(
+    private http: HttpService,
+    private router: Router,
+    private videoService: VideoService,
+    private searchService: SearchService
+  ) {}
 
   // on loading
   ngOnInit(): void {
@@ -29,6 +40,14 @@ export class HomeComponent implements OnInit {
       // get nextPageToken to be used in loadNextVideos()
       this.nextPageToken = data["nextPageToken"];
     });
+    // subscribe to video object
+    this.videoService.currentVideoObject.subscribe(
+      videoObject => (this.videoObject = videoObject)
+    );
+    // subscribe to search input
+    this.searchService.currentSearchinput.subscribe(
+      searchInput => (this.searchInput = searchInput)
+    );
   }
 
   // on form submission
@@ -37,7 +56,14 @@ export class HomeComponent implements OnInit {
     this.channelTitle = video.snippet.channelTitle;
     this.videoId = video.id.videoId;
     this.title = video.snippet.title;
-    // routes to video component
+    // updates video object in video component
+    this.videoService.changeMessage(video);
+    // navigates to video component
+    this.navigateToVideo();
+  }
+
+  // navigates to video component
+  navigateToVideo() {
     this.router.navigate(["/video", this.videoId]);
   }
 
@@ -47,6 +73,12 @@ export class HomeComponent implements OnInit {
       this.notscrolly = false;
       this.loadNextVideos();
     }
+  }
+
+  // triggerred when search input is entered
+  searchGetVideos() {
+    //getvideos
+    //this.nextPageToken = data["nextPageToken"];
   }
 
   // loads next set of videos
