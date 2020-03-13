@@ -1,14 +1,13 @@
 <div class="container-video">
-  <ul *ngIf="videoTitle && videoChannelTitle" class="cards">
+  <ul *ngIf="videoTitle && videoChannelTitle && youtubeVideoLink" class="cards">
     {{
       videoTitle
     }}
-
     <iframe
       class="video"
       width="560"
       height="315"
-      src="https://www.youtube.com/embed/r-yxNNO1EI8"
+      [src]="byPassSanitizer()"
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
