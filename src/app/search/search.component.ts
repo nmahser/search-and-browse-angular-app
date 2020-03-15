@@ -10,23 +10,26 @@ import { Router } from "@angular/router";
   styleUrls: ["./search.component.scss"]
 })
 export class SearchComponent implements OnInit {
-  results;
+  searchInput: string;
+
+  // used form control to hold search input value
   queryField: FormControl = new FormControl();
 
   constructor(private searchService: SearchService, private router: Router) {}
 
   ngOnInit(): void {
-    console.log(this.queryField);
+    // subscribe to search input
+    this.searchService.currentSearchinput.subscribe(
+      searchInput => (this.searchInput = searchInput)
+    );
   }
 
-  // gets search box input and makes the api call
+  homeComponentFunction() {
+    this.searchService.onSearchInput();
+  }
+
   searchThis(event: any) {
-    this.searchService.search(this.queryField.value).subscribe(result => {
-      if (result == null) {
-        return;
-      } else {
-        this.results = result["items"];
-      }
-    });
+    // updates video object in video component
+    this.searchService.updateSearchInput(this.queryField.value);
   }
 }
