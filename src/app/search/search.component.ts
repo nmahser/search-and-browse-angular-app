@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { debounceTime, distinctUntilChanged, switchMap } from "rxjs/operators";
 import { SearchService } from "../search.service";
 import { Router } from "@angular/router";
 
