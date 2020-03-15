@@ -40,45 +40,50 @@ export class HomeComponent implements OnInit {
     this.videoService.currentVideoObject.subscribe(
       videoObject => (this.videoObject = videoObject)
     );
+
     // subscribe to search input
+    this.subscribeSearchInput();
+
+    // event emitter for searchGetVideos()
+    this.emitSearchGetVideos();
+
+    // gets the videos
+    this.http.getVideos(this.searchInput).subscribe(data => {
+      this.videos = data["items"];
+      // get nextPageToken to be used in loadNextVideos()
+      this.nextPageToken = data["nextPageToken"];
+    });
+  }
+
+  // subscribe to search input
+  subscribeSearchInput() {
     this.searchService.currentSearchinput.subscribe(
       searchInput => (this.searchInput = searchInput)
     );
-    // event emitter for searchGetVideos()
+  }
+
+  // event emitter for searchGetVideos()
+  emitSearchGetVideos() {
     if (this.searchService.subsVar == undefined) {
       this.searchService.subsVar = this.searchService.invokeSearchGetVideos.subscribe(
         (name: string) => {
           this.searchGetVideos();
         }
       );
+      this.searchService.subsVar = undefined;
     }
-
-    console.log(this.searchInput);
-    this.http.getVideos(this.searchInput).subscribe(data => {
-      this.videos = data["items"];
-      // get nextPageToken to be used in loadNextVideos()
-      this.nextPageToken = data["nextPageToken"];
-    });
-
-    //gets the videos
-    //this.searchGetVideos();
   }
-
   // triggerred when search input is entered
   searchGetVideos() {
     // user to navigate back to home page when search parameter entered in video component
     if (this.searchInput !== "undefined") {
-      console.log("!");
-      console.log(this.searchInput);
       this.router.navigate([""]);
     }
     // gets the videos
     this.http.getVideos(this.searchInput).subscribe(data => {
       this.videos = data["items"];
-      console.log(this.videos);
       // get nextPageToken to be used in loadNextVideos()
       this.nextPageToken = data["nextPageToken"];
-      console.log("Searchgetvideos");
     });
   }
 
@@ -101,7 +106,6 @@ export class HomeComponent implements OnInit {
 
   // triggered when scrolled down
   onScroll() {
-    console.log("onscroll");
     if (this.notscrolly && this.notMoreVideos) {
       this.notscrolly = false;
       this.loadNextVideos();
@@ -121,7 +125,6 @@ export class HomeComponent implements OnInit {
       // add new videos to do existing videos
       this.videos = this.videos.concat(newData);
       this.notscrolly = true;
-      console.log(this.notscrolly, this.notMoreVideos);
     });
   }
 }
