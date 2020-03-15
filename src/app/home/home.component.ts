@@ -48,9 +48,26 @@ export class HomeComponent implements OnInit {
     this.searchService.currentSearchinput.subscribe(
       searchInput => (this.searchInput = searchInput)
     );
+    // event emitter for searchGetVideos()
+    if (this.searchService.subsVar == undefined) {
+      this.searchService.subsVar = this.searchService.invokeSearchGetVideos.subscribe(
+        (name: string) => {
+          this.searchGetVideos();
+        }
+      );
+    }
   }
 
-  // on form submission
+  // triggerred when search input is entered
+  searchGetVideos() {
+    this.http.getVideos(this.searchInput).subscribe(data => {
+      this.videos = data["items"];
+      // get nextPageToken to be used in loadNextVideos()
+      this.nextPageToken = data["nextPageToken"];
+    });
+  }
+
+  // on click "Watch Video"
   onClickWatch(video: any) {
     this.description = video.snippet.title;
     this.channelTitle = video.snippet.channelTitle;
@@ -69,22 +86,18 @@ export class HomeComponent implements OnInit {
 
   // triggered when scrolled down
   onScroll() {
+    console.log("onscroll");
     if (this.notscrolly && this.notMoreVideos) {
       this.notscrolly = false;
       this.loadNextVideos();
     }
   }
 
-  // triggerred when search input is entered
-  searchGetVideos() {
-    //getvideos
-    //this.nextPageToken = data["nextPageToken"];
-  }
-
   // loads next set of videos
   loadNextVideos() {
     let nextPageToken = this.nextPageToken;
-    this.http.infiteScroll(nextPageToken).subscribe(data => {
+    let searchInput = this.searchInput;
+    this.http.infiteScroll(nextPageToken, searchInput).subscribe(data => {
       const newData = data["items"];
       this.nextPageToken = data["nextPageToken"];
       if (newData.length === 0) {
