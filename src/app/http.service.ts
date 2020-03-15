@@ -12,19 +12,35 @@ export class HttpService {
   API_KEY: string = environment.API_KEY;
   constructor(private http: HttpClient) {}
 
+  // base url
+  baseUrl: string = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&&maxResults=9&q=dog`;
+
   // get videos - home page
-  public getVideos() {
+  public getVideos(searchInput?: string) {
+    // if searchInput is not passed on the function, assign it to empty string
+    if (searchInput == undefined) {
+      searchInput = "";
+    }
+    this.baseUrl =
+      `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&&maxResults=9&q=dog` +
+      searchInput;
     return this.http
-      .get(
-        `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&q=dog`
-      )
-      .pipe(retry(2), catchError(this.handleError)); // makes the second call if first one fails
+      .get(this.baseUrl)
+      .pipe(retry(2), catchError(this.handleError));
+    // makes the second call if first one fails
   }
 
   // infinite scroll
-  public infiteScroll(PageToken) {
+  public infiteScroll(PageToken: string, searchInput?: string) {
+    // if searchInput is not passed on the function, assign it to empty string
+    if (searchInput == undefined) {
+      searchInput = "";
+    }
+    console.log(PageToken);
     let nextPageToken = PageToken;
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&q=dog&maxResults=10&pageToken=${nextPageToken}`;
+    const url =
+      `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&maxResults=9&pageToken=${nextPageToken}&q=dog` +
+      searchInput;
     return this.http.get(url).pipe(retry(2), catchError(this.handleError));
   }
 
