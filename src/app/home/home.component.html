@@ -3,7 +3,7 @@
     <li *ngFor="let video of videos" class="cards_item">
       <div class="card">
         <div class="card_image">
-          <img [src]="video.snippet.thumbnails.high.url" alt="thumbnail" />
+          <img [src]="video.snippet.thumbnails.medium.url" alt="thumbnail" />
         </div>
         <div class="card_content">
           <h2 class="card_title">{{ video.snippet.title }}</h2>
