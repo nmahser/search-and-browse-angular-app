@@ -3,6 +3,7 @@ import { HttpService } from "../http.service";
 import { Router } from "@angular/router";
 import { VideoService } from "../video.service";
 import { SearchService } from "../search.service";
+import { notStrictEqual } from "assert";
 
 @Component({
   selector: "app-home",
@@ -35,11 +36,6 @@ export class HomeComponent implements OnInit {
 
   // on loading
   ngOnInit(): void {
-    this.http.getVideos().subscribe(data => {
-      this.videos = data["items"];
-      // get nextPageToken to be used in loadNextVideos()
-      this.nextPageToken = data["nextPageToken"];
-    });
     // subscribe to video object
     this.videoService.currentVideoObject.subscribe(
       videoObject => (this.videoObject = videoObject)
@@ -56,14 +52,33 @@ export class HomeComponent implements OnInit {
         }
       );
     }
-  }
 
-  // triggerred when search input is entered
-  searchGetVideos() {
+    console.log(this.searchInput);
     this.http.getVideos(this.searchInput).subscribe(data => {
       this.videos = data["items"];
       // get nextPageToken to be used in loadNextVideos()
       this.nextPageToken = data["nextPageToken"];
+    });
+
+    //gets the videos
+    //this.searchGetVideos();
+  }
+
+  // triggerred when search input is entered
+  searchGetVideos() {
+    // user to navigate back to home page when search parameter entered in video component
+    if (this.searchInput !== "undefined") {
+      console.log("!");
+      console.log(this.searchInput);
+      this.router.navigate([""]);
+    }
+    // gets the videos
+    this.http.getVideos(this.searchInput).subscribe(data => {
+      this.videos = data["items"];
+      console.log(this.videos);
+      // get nextPageToken to be used in loadNextVideos()
+      this.nextPageToken = data["nextPageToken"];
+      console.log("Searchgetvideos");
     });
   }
 
@@ -106,6 +121,7 @@ export class HomeComponent implements OnInit {
       // add new videos to do existing videos
       this.videos = this.videos.concat(newData);
       this.notscrolly = true;
+      console.log(this.notscrolly, this.notMoreVideos);
     });
   }
 }
