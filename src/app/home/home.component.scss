@@ -13,7 +13,7 @@
 }
 
 img {
-  height: auto;
+  height: 220px;
   max-width: 100%;
   vertical-align: middle;
 }
@@ -70,6 +70,9 @@ img {
   overflow: hidden;
 }
 
+.card_image {
+  height: 220px;
+}
 // Needs media queries!!!
 .card_content {
   padding: 1rem;
@@ -96,6 +99,7 @@ img {
   font-weight: 400;
   height: 105px;
 }
+
 .made_by {
   font-weight: 400;
   font-size: 13px;
