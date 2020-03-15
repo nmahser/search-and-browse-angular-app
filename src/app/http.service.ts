@@ -41,8 +41,8 @@ export class HttpService {
     let nextPageToken = PageToken;
     const url =
       `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&maxResults=9&pageToken=${nextPageToken}&q=dog` +
-      " ";
-    searchInput;
+      " " +
+      searchInput;
     console.log(url);
     return this.http.get(url).pipe(retry(2), catchError(this.handleError));
   }
