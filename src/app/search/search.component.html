@@ -1,12 +1,16 @@
-<section class="filter-wrapper">
-  <div class="keyword-wrapper">
-    <input
-      (keydown.enter)="searchThis($event)"
-      [formControl]="queryField"
-      type="text"
-      id="keyword"
-      placeholder="search for videos..."
-      autofocus
-    />
-  </div>
-</section>
+<input
+  type="search"
+  class="form-control"
+  (keydown.enter)="searchThis($event); homeComponentFunction()"
+  [formControl]="queryField"
+  placeholder="Search"
+/>
+<div class="input-group-append">
+  <button
+    type="submit"
+    class="btn btn-secondary"
+    (click)="searchThis($event); homeComponentFunction()"
+  >
+    <fa-icon [icon]="searchIcon"></fa-icon>
+  </button>
+</div>
