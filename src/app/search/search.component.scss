@@ -4,7 +4,11 @@
 .input-group-append {
   display: flex;
   align-items: stretch;
-  flex: 0 0 10%;
+  flex: 0 0 8%;
+}
+.form-control {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
 }
 
 /* fill the parent flex container */
@@ -12,4 +16,6 @@
   flex: 1;
   border-color: $white;
   background: $gradientBackground;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
 }
