@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { VideoService } from "../video.service";
 import { DomSanitizer } from "@angular/platform-browser";
 import { SearchService } from "../search.service";
 
@@ -19,17 +18,14 @@ export class VideoComponent implements OnInit {
   searchInput: string;
 
   constructor(
-    private videoService: VideoService,
     private sanitizer: DomSanitizer,
     private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
-    // subscribe to video object. Video object is passed from home component
-    this.videoService.currentVideoObject.subscribe(
-      videoObject => (this.videoObject = videoObject)
-    );
-    // assign title and channelTitle from video object
+    // get videoObject stored in home component
+    this.videoObject = JSON.parse(localStorage.getItem("videoObject"));
+    // assign title, videoId and channelTitle from video object
     this.videoTitle = this.videoObject["snippet"].title;
     this.videoChannelTitle = this.videoObject["snippet"].channelTitle;
     this.videoId = this.videoObject["id"].videoId;
@@ -47,3 +43,28 @@ export class VideoComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.youtubeVideoLink);
   }
 }
+
+/*
+// assign title and channelTitle from video object
+    this.videoTitle = this.videoObject["snippet"].title;
+    this.videoChannelTitle = this.videoObject["snippet"].channelTitle;
+    this.videoId = this.videoObject["id"].videoId;
+    // paste videoId into youtube embed link
+    this.youtubeVideoLink = this.youtubeVideoLink.concat(this.videoId);
+/*
+
+/* // save videoTitle, channelTitle and videoId. When the page is refreshed, these values are retained in the browser.
+    // setters for videoTitle, videoChannelTitle, videoID
+    localStorage.setItem("storedTitle", this.videoObject["snippet"].title);
+
+    localStorage.setItem(
+      "storedChannelTitle",
+      this.videoObject["snippet"].channelTitle
+    );
+    localStorage.setItem("storedVideoId", this.videoObject["id"].videoId);
+
+    // getters for videoTitle, videoChannelTitle, videoID
+    this.videoTitle = localStorage.getItem("storedTitle");
+    this.videoChannelTitle = localStorage.getItem("storedChannelTitle");
+    this.videoId = localStorage.getItem("storedVideoId");
+    */

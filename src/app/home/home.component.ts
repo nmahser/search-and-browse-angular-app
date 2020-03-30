@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { HttpService } from "../http.service";
 import { Router } from "@angular/router";
-import { VideoService } from "../video.service";
 import { SearchService } from "../search.service";
 import { notStrictEqual } from "assert";
 
@@ -16,7 +15,7 @@ export class HomeComponent implements OnInit {
   channelTitle: string;
   videoId: string;
   title: string;
-  videos;
+  videos: Array<object>;
 
   // variables for infinite scroll
   notMoreVideos = true;
@@ -30,16 +29,15 @@ export class HomeComponent implements OnInit {
   constructor(
     private http: HttpService,
     private router: Router,
-    private videoService: VideoService,
     private searchService: SearchService
   ) {}
 
   // on loading
   ngOnInit(): void {
     // subscribe to video object
-    this.videoService.currentVideoObject.subscribe(
+    /*this.videoService.currentVideoObject.subscribe(
       videoObject => (this.videoObject = videoObject)
-    );
+    );*/
 
     // subscribe to search input
     this.subscribeSearchInput();
@@ -93,8 +91,9 @@ export class HomeComponent implements OnInit {
     this.channelTitle = video.snippet.channelTitle;
     this.videoId = video.id.videoId;
     this.title = video.snippet.title;
-    // updates video object in video component
-    this.videoService.changeMessage(video);
+    // stores video object localy for video component
+    localStorage.removeItem("videoObject");
+    localStorage.setItem("videoObject", JSON.stringify(video));
     // navigates to video component
     this.navigateToVideo();
   }
