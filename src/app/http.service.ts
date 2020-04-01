@@ -27,8 +27,7 @@ export class HttpService {
       searchInput;
     return this.http
       .get(this.baseUrl)
-      .pipe(retry(2), catchError(this.handleError));
-    // makes the second call if first one fails
+      .pipe(retry(2), catchError(this.handleError)); // makes the second call if first one fails
   }
 
   // infinite scroll
@@ -37,13 +36,11 @@ export class HttpService {
     if (searchInput == undefined) {
       searchInput = "";
     }
-    console.log(PageToken);
     let nextPageToken = PageToken;
     const url =
       `https://www.googleapis.com/youtube/v3/search?key=${this.API_KEY}&part=snippet&type=video&maxResults=9&pageToken=${nextPageToken}&q=dog` +
       " " +
       searchInput;
-    console.log(url);
     return this.http.get(url).pipe(retry(2), catchError(this.handleError));
   }
 
