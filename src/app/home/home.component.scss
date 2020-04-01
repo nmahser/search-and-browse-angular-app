@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,700");
+@import "../../styles.scss";
 
 /* Design */
 *,
@@ -19,7 +20,7 @@ img {
 }
 
 .btn {
-  color: #ffffff;
+  color: $white;
   padding: 0.8rem;
   font-size: 14px;
   text-transform: uppercase;
@@ -62,7 +63,7 @@ img {
 }
 
 .card {
-  background-color: white;
+  background-color: $white;
   border-radius: 0.25rem;
   box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -76,12 +77,13 @@ img {
 // Needs media queries!!!
 .card_content {
   padding: 1rem;
-  background: linear-gradient(to bottom left, #ef8d9c 40%, #ffc39e 100%);
+  background: $gradientBackground;
   height: 260px;
 }
 
 .card_title {
   color: #ffffff;
+  font-family: "Nunito", arial, sans-serif;
   font-size: 0.975rem;
   font-weight: 700;
   letter-spacing: 1px;
@@ -93,6 +95,7 @@ img {
 // Needs media queries!!!
 .card_text {
   color: #ffffff;
+  font-family: "Nunito", arial, sans-serif;
   font-size: 0.875rem;
   line-height: 1.5;
   margin-bottom: 1.25rem;
