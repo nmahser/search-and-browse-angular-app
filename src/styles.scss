@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+
+/* font tye */
+@font-face {
+  font-family: "Nunito";
+  src: url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+}
+
+/* GLOBAL COLORS */
+$primary: #41b3a3;
+$white: #ffffff;
+
+/* BACKGROUND COLOR */
+$gradientBackground: linear-gradient(to bottom left, #ef8d9c 40%, #ffc39e 100%);
+
+/* CENTER SEARCH COMPONENT */
+.search-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: stretch;
+  width: 100%;
+}
+
+/* fill 50% of search-container */
+.search-component {
+  display: flex;
+  align-items: stretch;
+  width: 50%;
+}
