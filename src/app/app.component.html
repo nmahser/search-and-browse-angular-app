@@ -1,12 +1,27 @@
-<header>
-  <div class="header-nav">
-    <a href="#" class="logo">Dog Search</a>
-    <nav>
-      <ul>
-        <li><a href="#" routerLink="/">Home</a></li>
-      </ul>
-    </nav>
+<nav class="navbar navbar-expand-md navbar-dark">
+  <a class="navbar-brand" href="#">Dog Search</a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  >
+    <span class="navbar-toggler-icon"> </span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="search-container">
+      <app-search class="search-component"></app-search>
+    </div>
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link text-center" href="#"
+          >Home <span class="sr-only">(current)</span></a
+        >
+      </li>
+    </ul>
   </div>
-  <app-search></app-search>
-</header>
+</nav>
 <router-outlet></router-outlet>

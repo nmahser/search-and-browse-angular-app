@@ -1,58 +1,19 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
+@import "../styles.scss";
 
-$primary: rgb(111, 0, 255);
-
-html {
-  background-color: #ecf9ff;
-}
-
-body {
-  color: #272727;
-  font-family: "Quicksand", serif;
-  font-style: normal;
-  font-weight: 400;
-  letter-spacing: 0;
-  padding: 1rem;
-}
-
-.header-nav {
-  width: 90%;
-  margin: 0 auto;
-}
-
-header {
+.navbar {
   background: $primary;
-  padding: 1em 0;
 
   a {
-    color: white;
+    color: $white;
     text-decoration: none;
+    font-family: "Nunito", arial, sans-serif;
+    font-size: 1.25em;
   }
   a.logo {
     font-weight: bold;
   }
-
-  nav {
-    float: right;
-
-    ul {
-      list-style-type: none;
-      margin: 0;
-      display: flex;
-
-      li a {
-        padding: 1em;
-
-        &:hover {
-          background: darken($primary, 10%);
-        }
-      }
-    }
-  }
 }
 
-h1 {
-  font-size: 24px;
-  font-weight: 400;
-  text-align: center;
+button.navbar-toggler {
+  background: $gradientBackground;
 }
