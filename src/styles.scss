@@ -1,8 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 
-@import url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
-
-/* font tye */
+/* FONT TYPE */
 @font-face {
   font-family: "Nunito";
   src: url("https://fonts.googleapis.com/css?family=Nunito:400,700&display=swap");
@@ -24,9 +22,12 @@ $gradientBackground: linear-gradient(to bottom left, #ef8d9c 40%, #ffc39e 100%);
   width: 100%;
 }
 
-/* fill 50% of search-container */
+/* Fill 50% of search-container */
 .search-component {
   display: flex;
   align-items: stretch;
   width: 50%;
+}
+body {
+  background: #f1f1f1;
 }
