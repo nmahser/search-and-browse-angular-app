@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { SearchService } from "../search.service";
 import { Router } from "@angular/router";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faPaw } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: "app-search",
@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit {
   searchInput: string;
 
   // fontawesome icon
-  searchIcon = faSearch;
+  pawIcon = faPaw;
 
   // used form control to hold search input value
   queryField: FormControl = new FormControl();
