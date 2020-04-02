@@ -10,6 +10,11 @@
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }
+/* change the color of input's outer border */
+.form-control:focus {
+  border-color: #f7cfcf;
+  box-shadow: inset 0px 1px 1px #efa4a4;
+}
 
 /* fill the parent flex container */
 .btn-secondary {
