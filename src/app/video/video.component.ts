@@ -32,7 +32,10 @@ export class VideoComponent implements OnInit {
     this.videoId = this.videoObject["id"].videoId;
 
     // paste videoId into youtube embed link
-    this.youtubeVideoLink = this.youtubeVideoLink.concat(this.videoId);
+    this.youtubeVideoLink = this.youtubeVideoLink.concat(
+      this.videoId,
+      "?autoplay=1" // auto plays the video
+    );
 
     // subscribe to search input
     this.searchService.currentSearchinput.subscribe(
