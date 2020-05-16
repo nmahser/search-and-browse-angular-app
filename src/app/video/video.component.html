@@ -1,10 +1,10 @@
-<div class="container-video">
-  <ul *ngIf="videoTitle && videoChannelTitle && youtubeVideoLink" class="cards">
-    {{
-      videoTitle
-    }}
+<div
+  *ngIf="videoTitle && videoChannelTitle && youtubeVideoLink"
+  class="container-video"
+>
+  <div class="video2 embed-responsive embed-responsive-16by9">
     <iframe
-      class="video"
+      class="video embed-responsive-item"
       width="560"
       height="315"
       [src]="byPassSanitizer()"
@@ -12,8 +12,11 @@
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen
     ></iframe>
-    {{
-      videoChannelTitle
-    }}
-  </ul>
+  </div>
+  <div class="video-title">
+    <h3>{{ videoTitle }}</h3>
+  </div>
+  <div class="video-channel-title">
+    <p>{{ videoChannelTitle }}</p>
+  </div>
 </div>
