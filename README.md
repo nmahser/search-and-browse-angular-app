@@ -1,7 +1,7 @@
 # Dog YouTube Videos
 Angular frontend application that implements YouTube's Data API to search and watch dog related YouTube videos.
 
-![picture_compress](https://user-images.githubusercontent.com/20258893/82132714-c007db00-97b0-11ea-8512-afcc3fe153ad.gif)
+![ezgif com-optimize(1)](https://user-images.githubusercontent.com/20258893/82151282-cafe5200-9828-11ea-9b34-bb8c5932bbec.gif)
 
 Colors don't look well in the GIF... <br>
 
