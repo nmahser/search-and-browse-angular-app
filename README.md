@@ -1,6 +1,10 @@
 # Dog YouTube Videos
 Angular frontend application that implements YouTube's Data API to search and watch dog related YouTube videos.
 
+![picture_compress](https://user-images.githubusercontent.com/20258893/82132714-c007db00-97b0-11ea-8512-afcc3fe153ad.gif)
+
+Colors don't look well in the GIF... <br>
+
 ## Preparation / Installation
 
 Generate Google API Key from google [developer console](https://console.developers.google.com) <br>
